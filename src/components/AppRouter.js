@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
+import { Context } from '..'
 import { authRoutes, publicRoutes } from '../routes'
 import { SHOP_ROUTE } from '../utils/consts'
 const AppRouter = () => {
-    const isAuth = true
+    const {user} = useContext(Context)
     return (
         <div>
             <Switch>
-                {isAuth &&
+                {user.isAuth &&
                     authRoutes.map(({ path, Component }) => {
                         return <Route key={path} path={path} component={Component} exact />
                     })}
@@ -16,7 +17,7 @@ const AppRouter = () => {
                 })}
                 <Redirect to={SHOP_ROUTE}/>
             </Switch>
-        </div>
+        </div> )
 }
 
 export default AppRouter
