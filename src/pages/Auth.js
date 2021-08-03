@@ -5,9 +5,7 @@ import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../utils/consts'
 
 const Auth = () => {
     const location = useLocation()
-    console.log(location)
     const isLogin = location.pathname === LOGIN_ROUTE
-    console.log(isLogin)
     return (
         <Container
             className='d-flex justify-content-center align-items-center'
