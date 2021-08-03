@@ -13,7 +13,7 @@ const AppRouter = () => {
                         return <Route key={path} path={path} component={Component} exact />
                     })}
                 {publicRoutes.map(({ path, Component }) => {
-                    return <Route key={path} path={path} component={Component} exact />
+                    return <Route key={path} path={path} component={Component} />
                 })}
                 <Redirect to={SHOP_ROUTE}/>
             </Switch>
