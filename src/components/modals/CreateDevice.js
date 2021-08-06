@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Modal, Button, Form, Dropdown } from 'react-bootstrap'
+import { Modal, Button, Form, Dropdown, Row, Col } from 'react-bootstrap'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem'
 import DropdownMenu from 'react-bootstrap/esm/DropdownMenu'
 import DropdownToggle from 'react-bootstrap/esm/DropdownToggle'
@@ -10,6 +10,12 @@ import { Context } from '../..'
 const CreateDevice = observer(({ show, onHide }) => {
     const { device } = useContext(Context)
     const [info, setInfo] = useState([])
+    const addInfo = () => {
+        setInfo([...info, { title: '', description: '', number: Date.now() }])
+    }
+    const removeInfo = (number) => {
+        setInfo(info.filter(item => item.number !== number ))
+    }
     return (
         <Modal show={show} onHide={onHide} size='lg' centered>
             <Modal.Header closeButton>
@@ -38,7 +44,7 @@ const CreateDevice = observer(({ show, onHide }) => {
                         className='mt-3'
                     ></Form.Control>
                     <Form.Control
-                        placeholder='Enter the device name'
+                        placeholder="Enter the device's price"
                         className='mt-3'
                         type='number'
                     ></Form.Control>
@@ -47,7 +53,23 @@ const CreateDevice = observer(({ show, onHide }) => {
                         className='mt-3'
                         type='file'
                     ></Form.Control>
-                    <hr/>
+                    <hr />
+                    <Button variant='outline-dark' onClick={() => addInfo()}>
+                        To add a new feature
+                    </Button>
+                    {info.map((item) => (
+                        <Row className='mt-4' key={item.number}>
+                            <Col md={4}>
+                                <Form.Control placeholder='Enter the feature name'></Form.Control>
+                            </Col>
+                            <Col md={4}>
+                                <Form.Control placeholder='Enter the feature description'></Form.Control>
+                            </Col>
+                            <Col>
+                            <Button variant='outline-danger' onClick={() => removeInfo(item.number)}>To delete the feature</Button>
+                            </Col>
+                        </Row>
+                    ))}
                 </Form>
             </Modal.Body>
             <Modal.Footer>
