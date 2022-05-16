@@ -1,3 +1,3 @@
-# React App
+# React App.
 
-A client part of e-commerce shop
+A client part of e-commerce shop.
